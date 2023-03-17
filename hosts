@@ -4,16 +4,6 @@
 [onpremise_debian]
 10.10.10.151
 
-[node01]
-144.22.177.56
-
-[node02]
-168.138.141.171
-
-[instancias_cloud:children]
-node01
-node02
-
 [onpremise:children]
 onpremise_ubuntu
 onpremise_debian
