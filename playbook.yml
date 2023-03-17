@@ -1,0 +1,12 @@
+---
+- name: Playbook Padrão - Starting Deploy
+  hosts: onpremise
+  roles:
+    #- common
+    #- jenkins
+    - alteracao_senha
+    #- criacao_usuario
+      #- inativacao_usuario
+      #- ativacao_usuario
+
+...
