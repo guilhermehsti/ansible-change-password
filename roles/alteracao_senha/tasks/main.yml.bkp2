@@ -1,0 +1,31 @@
+---
+ 
+- name: gerando senha aleatoria
+  delegate_to: localhost
+    #ansible.builtin.shell: openssl rand -base64 32 | tr -d "/","=","+"
+  ansible.builtin.shell: newpass -l 25
+  register: mynewpass
+    #loop: "{{ ansible_play_hosts }}"
+    #loop: "{{ groups['onpremise'] }}"
+- name: debug
+  debug:
+    var: mynewpass.stdout 
+- name: salvando senha gerada em um arquivo
+  delegate_to: localhost
+  ansible.builtin.copy:
+    content: "Hostname: {{ ansible_hostname }} IP: {{ ansible_default_ipv4.address }} Senha: {{ mynewpass.stdout }} \n"  
+    dest: /home/guilherme/out_newpass.log
+    mode: '0600'
+  loop: "{{ groups['onpremise'] }}"
+      #loop: "{{ ansible_play_hosts }}"
+      #with_inventory_hostnames:
+      #- all
+- name: alterando a senha do usuario
+  ansible.builtin.user:
+    name: guilherme8
+      #state: present
+    password: "{{ mynewpass.stdout | password_hash('sha512') }}"
+  become: true
+
+   
+...
