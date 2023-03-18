@@ -46,5 +46,5 @@ Para executar a task, pode ser utilizado o seguinte comando shell:
 ```bash
 ansible-playbook -i hosts playbook.yml --extra-vars="name_user=usuario" -K
 ```
-*com a opção --extra-vars, a variável name_user recebe o argumento com o nome do usuário que deverá ter a senha alterada a opção -K irá pedir a senha sudo para eleveçao de privilégios. o arquivo com as senhas geradas será salvo no localhost em $HOME*
+*com a opção --extra-vars, a variável name_user recebe o argumento com o nome do usuário que deverá ter a senha alterada. A opção -K irá pedir a senha sudo para eleveçao de privilégios. O arquivo com as senhas geradas será salvo no localhost em $HOME*
 
