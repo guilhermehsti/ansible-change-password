@@ -10,7 +10,7 @@ Role criada para alteração em massa da senha de usuário em servidores linux u
 ansible.cfg ##configurações padrões do ambiente
 group_vars > onpremise > vars 
 ##variáveis utilizadas para todos os hosts adicionados ao grupo onpremise
-hosts ##declaração dos hosts e grupos
+hosts ##declaração dos targets e grupos
 playbook.yml ##declaração da role que será executada e de hosts/grupos onde serão executadas as tasks.
 roles > alteracao_senha > tasks > main.yml ##lista de tarefas a serem executas na role
 
