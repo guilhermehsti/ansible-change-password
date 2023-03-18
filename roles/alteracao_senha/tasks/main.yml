@@ -4,17 +4,28 @@
   delegate_to: localhost
   ansible.builtin.shell: newpass -l 25
   register: mynewpass
-    
+
 ## imprimir em tela as senhas geradas ## 
 #- name: debug
   #debug:
     #var: mynewpass.stdout 
 
+- name: criando arquivo que receberá as senhas com permissões somente do owner
+  file:
+    path: $HOME/{{ ansible_date_time.iso8601_basic_short }}_pass.txt
+    state: touch
+    mode: 0600
+  register: newfile
+  run_once: true
+    #when: inventory_hostname in groups['local']
+    #when: inventory_hostname in localhost
+  delegate_to: localhost
+
 - name: salvando senha gerada em um arquivo
   lineinfile:
-     line: "Hostname: {{ ansible_hostname }} IP: {{ ansible_default_ipv4.address }} Senha: {{ mynewpass.stdout }}"
-     insertafter: EOF
-     dest: $HOME/senhas/saida3.log
+    line: "Hostname: {{ ansible_hostname }} IP: {{ ansible_default_ipv4.address }} Usuario: {{ name_user }} Senha: {{ mynewpass.stdout }}"
+    insertafter: EOF
+    dest: "{{ newfile.dest }}"
   delegate_to: localhost
 
 - name: alterando a senha do usuario
@@ -22,5 +33,6 @@
     name: "{{ name_user }}"
     password: "{{ mynewpass.stdout | password_hash('sha512') }}"
   become: true
+
 
 ...
