@@ -22,4 +22,5 @@ Role criada para alteração em massa da senha de usuário em servidores linux u
 3. Execução: 
   a) Para executar a task, é necessário o seguinte comando: ansible-playbook -i hosts playbook.yml --extra-vars="name_user=usuario" -K
   ##com a opção --extra-vars, a variável name_user recebe o argumento com o nome do usuário que deverá ter a senha alterada.##
-  ##a opção -K irá pedir a senha sudo para eleveçao de privilégios.""
+  ##a opção -K irá pedir a senha sudo para eleveçao de privilégios. ##
+  ##o arquivo com as senhas geradas será salvo no localhost em $HOME ##
